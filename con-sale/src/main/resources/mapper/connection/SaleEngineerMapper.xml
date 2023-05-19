@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.sale.mapper.SaleEngineerMapper">
+    
+    <resultMap type="SaleEngineer" id="SaleEngineerResult">
+        <result property="id"    column="id"    />
+        <result property="engineerName"    column="engineer_name"    />
+        <result property="type"    column="type"    />
+        <result property="rank"    column="rank"    />
+        <result property="address"    column="address"    />
+        <result property="progress"    column="progress"    />
+        <result property="pouringVolume"    column="pouring_volume"    />
+        <result property="distance"    column="distance"    />
+        <result property="constructionUnit"    column="construction_unit"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="connectName"    column="connect_name"    />
+        <result property="contactName"    column="contact_name"    />
+        <result property="contactPhone"    column="contact_phone"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="tenantId"    column="tenant_id"    />
+    </resultMap>
+
+    <sql id="selectSaleEngineerVo">
+        select `id`, `engineer_name`, `type`, `rank`, `address`, `progress`, `pouring_volume`, `distance`, `construction_unit`, `start_time`, `end_time`, `connect_name`, `contact_name`, `contact_phone`, `remarks`, `tenant_id` from sale_engineer
+    </sql>
+
+    <select id="selectSaleEngineerList" parameterType="SaleEngineer" resultMap="SaleEngineerResult">
+        <include refid="selectSaleEngineerVo"/>
+        <where>  
+            <if test="engineerName != null  and engineerName != ''"> and `engineer_name` like concat('%', #{engineerName}, '%')</if>
+            <if test="type != null  and type != ''"> and `type` = #{type}</if>
+            <if test="rank != null  and rank != ''"> and `rank`= #{rank}</if>
+            <if test="address != null  and address != ''"> and `address` like concat('%', #{address}, '%')</if>
+            <if test="progress != null  and progress != ''"> and `progress` = #{progress}</if>
+            <if test="pouringVolume != null  and pouringVolume != ''"> and `pouring_volume` = #{pouringVolume}</if>
+            <if test="distance != null  and distance != ''"> and `distance` = #{distance}</if>
+            <if test="constructionUnit != null  and constructionUnit != ''"> and `construction_unit` = #{constructionUnit}</if>
+            <if test="startTime != null  and startTime != ''"> and `start_time` = #{startTime}</if>
+            <if test="endTime != null  and endTime != ''"> and `end_time` = #{endTime}</if>
+            <if test="connectName != null  and connectName != ''"> and `connect_name` like concat('%', #{connectName}, '%')</if>
+            <if test="contactName != null  and contactName != ''"> and `contact_name` like concat('%', #{contactName}, '%')</if>
+            <if test="contactPhone != null  and contactPhone != ''"> and `contact_phone` = #{contactPhone}</if>
+            <if test="remarks != null  and remarks != ''"> and `remarks` = #{remarks}</if>
+            <if test="tenantId != null "> and `tenant_id` = #{tenantId}</if>
+        </where>
+    </select>
+    
+    <select id="selectSaleEngineerById" parameterType="Long" resultMap="SaleEngineerResult">
+        <include refid="selectSaleEngineerVo"/>
+        where `id` = #{id}
+    </select>
+        
+    <insert id="insertSaleEngineer" parameterType="SaleEngineer" useGeneratedKeys="true" keyProperty="id">
+        insert into `sale_engineer`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="engineerName != null">`engineer_name`,</if>
+            <if test="type != null">`type`,</if>
+            <if test="rank != null">`rank`,</if>
+            <if test="address != null">`address`,</if>
+            <if test="progress != null">`progress`,</if>
+            <if test="pouringVolume != null">`pouring_volume`,</if>
+            <if test="distance != null">`distance`,</if>
+            <if test="constructionUnit != null">`construction_unit`,</if>
+            <if test="startTime != null">`start_time`,</if>
+            <if test="endTime != null">`end_time`,</if>
+            <if test="connectName != null">`connect_name`,</if>
+            <if test="contactName != null">`contact_name`,</if>
+            <if test="contactPhone != null">`contact_phone`,</if>
+            <if test="remarks != null">`remarks`,</if>
+            <if test="tenantId != null">`tenant_id`,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="engineerName != null">#{engineerName},</if>
+            <if test="type != null">#{type},</if>
+            <if test="rank != null">#{rank},</if>
+            <if test="address != null">#{address},</if>
+            <if test="progress != null">#{progress},</if>
+            <if test="pouringVolume != null">#{pouringVolume},</if>
+            <if test="distance != null">#{distance},</if>
+            <if test="constructionUnit != null">#{constructionUnit},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="connectName != null">#{connectName},</if>
+            <if test="contactName != null">#{contactName},</if>
+            <if test="contactPhone != null">#{contactPhone},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="tenantId != null">#{tenantId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSaleEngineer" parameterType="SaleEngineer">
+        update `sale_engineer`
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="engineerName != null">`engineer_name` = #{engineerName},</if>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="rank != null">`rank` = #{rank},</if>
+            <if test="address != null">`address` = #{address},</if>
+            <if test="progress != null">`progress` = #{progress},</if>
+            <if test="pouringVolume != null">`pouring_volume` = #{pouringVolume},</if>
+            <if test="distance != null">`distance` = #{distance},</if>
+            <if test="constructionUnit != null">`construction_unit` = #{constructionUnit},</if>
+            <if test="startTime != null">`start_time` = #{startTime},</if>
+            <if test="endTime != null">`end_time` = #{endTime},</if>
+            <if test="connectName != null">`connect_name` = #{connectName},</if>
+            <if test="contactName != null">`contact_name` = #{contactName},</if>
+            <if test="contactPhone != null">`contact_phone` = #{contactPhone},</if>
+            <if test="remarks != null">`remarks` = #{remarks},</if>
+            <if test="tenantId != null">`tenant_id` = #{tenantId},</if>
+        </trim>
+        where `id`= #{id}
+    </update>
+
+    <delete id="deleteSaleEngineerById" parameterType="Long">
+        delete from `sale_engineer` where id = #{id}
+    </delete>
+
+    <delete id="deleteSaleEngineerByIds" parameterType="String">
+        delete from `sale_engineer` where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="findConnectionNames" resultType="java.lang.String">
+        select distinct UnitName from sale_connection
+    </select>
+
+    <!--查询所有工程名-->
+    <select id="findEngineerNames" resultType="java.lang.String">
+        select distinct engineer_name from sale_engineer
+    </select>
+</mapper>

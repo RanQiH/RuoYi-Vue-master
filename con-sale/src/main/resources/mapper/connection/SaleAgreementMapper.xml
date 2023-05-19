@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.sale.mapper.SaleAgreementMapper">
+    
+    <resultMap type="SaleAgreement" id="SaleAgreementResult">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="sum"    column="sum"    />
+        <result property="singDate"    column="sing_date"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="connectName"    column="connect_name"    />
+        <result property="entrustPerson"    column="entrust_person"    />
+        <result property="entrustContactInformation"    column="entrust_contact_information"    />
+        <result property="engineerName"    column="engineer_name"    />
+        <result property="constructionUnit"    column="construction_unit"    />
+        <result property="constructionAddress"    column="construction_address"    />
+        <result property="transportationDistance"    column="transportation_distance"    />
+        <result property="pouringVolume"    column="pouring_volume"    />
+        <result property="productPriceBasis"    column="product_price_basis"    />
+        <result property="productPrice"    column="product_price"    />
+        <result property="freightAgreement"    column="freight_agreement"    />
+        <result property="settlementUnit"    column="settlement_unit"    />
+        <result property="contacts"    column="contacts"    />
+        <result property="saleContactInformation"    column="sale_contact_information"    />
+        <result property="saleman"    column="saleman"    />
+        <result property="freightUnitPrice"    column="freight_unit_price"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="creator"    column="creator"    />
+        <result property="tenantId"    column="tenant_id"    />
+    </resultMap>
+
+    <sql id="selectSaleAgreementVo">
+        select id, type, sum, sing_date, start_time, end_time, connect_name, entrust_person, entrust_contact_information, engineer_name, construction_unit, construction_address, transportation_distance, pouring_volume, product_price_basis, product_price, freight_agreement, settlement_unit, contacts, sale_contact_information, saleman, freight_unit_price, remarks, creator, tenant_id from sale_agreement
+    </sql>
+
+    <select id="selectSaleAgreementList" parameterType="SaleAgreement" resultMap="SaleAgreementResult">
+        <include refid="selectSaleAgreementVo"/>
+        <where>  
+            <if test="type != null  and type != ''"> and type like concat('%', #{type}, '%')</if>
+            <if test="sum != null  and sum != ''"> and sum like concat('%', #{sum}, '%')</if>
+            <if test="singDate != null  and singDate != ''"> and sing_date like concat('%', #{singDate}, '%')</if>
+            <if test="startTime != null  and startTime != ''"> and start_time like concat('%', #{startTime}, '%')</if>
+            <if test="endTime != null  and endTime != ''"> and end_time like concat('%', #{endTime}, '%')</if>
+            <if test="connectName != null  and connectName != ''"> and connect_name like concat('%', #{connectName}, '%')</if>
+            <if test="entrustPerson != null  and entrustPerson != ''"> and entrust_person like concat('%', #{entrustPerson}, '%')</if>
+            <if test="entrustContactInformation != null  and entrustContactInformation != ''"> and entrust_contact_information like concat('%', #{entrustContactInformation}, '%')</if>
+            <if test="engineerName != null  and engineerName != ''"> and engineer_name like concat('%', #{engineerName}, '%')</if>
+            <if test="constructionUnit != null  and constructionUnit != ''"> and construction_unit like concat('%', #{constructionUnit}, '%')</if>
+            <if test="constructionAddress != null  and constructionAddress != ''"> and construction_address like concat('%', #{constructionAddress}, '%')</if>
+            <if test="transportationDistance != null "> and transportation_distance like concat('%', #{transportationDistance}, '%')</if>
+            <if test="pouringVolume != null  and pouringVolume != ''"> and pouring_volume like concat('%', #{pouringVolume}, '%')</if>
+            <if test="productPriceBasis != null  and productPriceBasis != ''"> and product_price_basis like concat('%', #{productPriceBasis}, '%')</if>
+            <if test="productPrice != null  and productPrice != ''"> and product_price like concat('%', #{productPrice}, '%')</if>
+            <if test="freightAgreement != null  and freightAgreement != ''"> and freight_agreement like concat('%', #{freightAgreement}, '%')</if>
+            <if test="settlementUnit != null  and settlementUnit != ''"> and settlement_unit like concat('%', #{settlementUnit}, '%')</if>
+            <if test="contacts != null  and contacts != ''"> and contacts like concat('%', #{contacts}, '%')</if>
+            <if test="saleContactInformation != null  and saleContactInformation != ''"> and sale_contact_information like concat('%', #{saleContactInformation}, '%')</if>
+            <if test="saleman != null  and saleman != ''"> and saleman like concat('%', #{saleman}, '%')</if>
+            <if test="freightUnitPrice != null  and freightUnitPrice != ''"> and freight_unit_price like concat('%', #{freightUnitPrice}, '%')</if>
+            <if test="remarks != null  and remarks != ''"> and remarks like concat('%', #{remarks}, '%')</if>
+            <if test="creator != null  and creator != ''"> and creator like concat('%', #{creator}, '%')</if>
+            <if test="tenantId != null "> and tenant_id like concat('%', #{tenantId}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectSaleAgreementById" parameterType="Long" resultMap="SaleAgreementResult">
+        <include refid="selectSaleAgreementVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSaleAgreement" parameterType="SaleAgreement" useGeneratedKeys="true" keyProperty="id">
+        insert into sale_agreement
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null">type,</if>
+            <if test="sum != null">sum,</if>
+            <if test="singDate != null">sing_date,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="connectName != null">connect_name,</if>
+            <if test="entrustPerson != null">entrust_person,</if>
+            <if test="entrustContactInformation != null">entrust_contact_information,</if>
+            <if test="engineerName != null">engineer_name,</if>
+            <if test="constructionUnit != null">construction_unit,</if>
+            <if test="constructionAddress != null">construction_address,</if>
+            <if test="transportationDistance != null">transportation_distance,</if>
+            <if test="pouringVolume != null">pouring_volume,</if>
+            <if test="productPriceBasis != null">product_price_basis,</if>
+            <if test="productPrice != null">product_price,</if>
+            <if test="freightAgreement != null">freight_agreement,</if>
+            <if test="settlementUnit != null">settlement_unit,</if>
+            <if test="contacts != null">contacts,</if>
+            <if test="saleContactInformation != null">sale_contact_information,</if>
+            <if test="saleman != null">saleman,</if>
+            <if test="freightUnitPrice != null">freight_unit_price,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="creator != null">creator,</if>
+            <if test="tenantId != null">tenant_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null">#{type},</if>
+            <if test="sum != null">#{sum},</if>
+            <if test="singDate != null">#{singDate},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="connectName != null">#{connectName},</if>
+            <if test="entrustPerson != null">#{entrustPerson},</if>
+            <if test="entrustContactInformation != null">#{entrustContactInformation},</if>
+            <if test="engineerName != null">#{engineerName},</if>
+            <if test="constructionUnit != null">#{constructionUnit},</if>
+            <if test="constructionAddress != null">#{constructionAddress},</if>
+            <if test="transportationDistance != null">#{transportationDistance},</if>
+            <if test="pouringVolume != null">#{pouringVolume},</if>
+            <if test="productPriceBasis != null">#{productPriceBasis},</if>
+            <if test="productPrice != null">#{productPrice},</if>
+            <if test="freightAgreement != null">#{freightAgreement},</if>
+            <if test="settlementUnit != null">#{settlementUnit},</if>
+            <if test="contacts != null">#{contacts},</if>
+            <if test="saleContactInformation != null">#{saleContactInformation},</if>
+            <if test="saleman != null">#{saleman},</if>
+            <if test="freightUnitPrice != null">#{freightUnitPrice},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="tenantId != null">#{tenantId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSaleAgreement" parameterType="SaleAgreement">
+        update sale_agreement
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null">type = #{type},</if>
+            <if test="sum != null">sum = #{sum},</if>
+            <if test="singDate != null">sing_date = #{singDate},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="connectName != null">connect_name = #{connectName},</if>
+            <if test="entrustPerson != null">entrust_person = #{entrustPerson},</if>
+            <if test="entrustContactInformation != null">entrust_contact_information = #{entrustContactInformation},</if>
+            <if test="engineerName != null">engineer_name = #{engineerName},</if>
+            <if test="constructionUnit != null">construction_unit = #{constructionUnit},</if>
+            <if test="constructionAddress != null">construction_address = #{constructionAddress},</if>
+            <if test="transportationDistance != null">transportation_distance = #{transportationDistance},</if>
+            <if test="pouringVolume != null">pouring_volume = #{pouringVolume},</if>
+            <if test="productPriceBasis != null">product_price_basis = #{productPriceBasis},</if>
+            <if test="productPrice != null">product_price = #{productPrice},</if>
+            <if test="freightAgreement != null">freight_agreement = #{freightAgreement},</if>
+            <if test="settlementUnit != null">settlement_unit = #{settlementUnit},</if>
+            <if test="contacts != null">contacts = #{contacts},</if>
+            <if test="saleContactInformation != null">sale_contact_information = #{saleContactInformation},</if>
+            <if test="saleman != null">saleman = #{saleman},</if>
+            <if test="freightUnitPrice != null">freight_unit_price = #{freightUnitPrice},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="creator != null">creator = #{creator},</if>
+            <if test="tenantId != null">tenant_id = #{tenantId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSaleAgreementById" parameterType="Long">
+        delete from sale_agreement where id = #{id}
+    </delete>
+
+    <delete id="deleteSaleAgreementByIds" parameterType="String">
+        delete from sale_agreement where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

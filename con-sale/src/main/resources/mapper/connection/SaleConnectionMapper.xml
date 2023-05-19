@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.sale.mapper.SaleConnectionMapper">
+    
+    <resultMap type="SaleConnection" id="SaleConnectionResult">
+        <result property="id"    column="id"    />
+        <result property="unitname"    column="UnitName"    />
+        <result property="unitcategory"    column="UnitCategory"    />
+        <result property="legalrepresentative"    column="LegalRepresentative"    />
+        <result property="telephone"    column="Telephone"    />
+        <result property="faxnumber"    column="FaxNumber"    />
+        <result property="email"    column="Email"    />
+        <result property="adress"    column="Adress"    />
+        <result property="postalcode"    column="PostalCode"    />
+        <result property="salesman"    column="SalesMan"    />
+        <result property="taxid"    column="TaxId"    />
+        <result property="remarks"    column="Remarks"    />
+        <result property="accountname"    column="AccountName"    />
+        <result property="openingbank"    column="OpeningBank"    />
+        <result property="bankaccount"    column="BankAccount"    />
+        <result property="contactname"    column="ContactName"    />
+        <result property="post"    column="Post"    />
+        <result property="contactinformation"    column="ContactInformation"    />
+        <result property="tenantId"    column="tenant_id"    />
+    </resultMap>
+
+    <sql id="selectSaleConnectionVo">
+        select id, UnitName, UnitCategory, LegalRepresentative, Telephone, FaxNumber, Email, Adress, PostalCode, SalesMan, TaxId, Remarks, AccountName, OpeningBank, BankAccount, ContactName, Post, ContactInformation, tenant_id from sale_connection
+    </sql>
+
+    <select id="selectSaleConnectionList" parameterType="SaleConnection" resultMap="SaleConnectionResult">
+        <include refid="selectSaleConnectionVo"/>
+        <where>  
+            <if test="unitname != null  and unitname != ''"> and UnitName like concat('%', #{unitname}, '%')</if>
+            <if test="unitcategory != null  and unitcategory != ''"> and UnitCategory = #{unitcategory}</if>
+            <if test="legalrepresentative != null  and legalrepresentative != ''"> and LegalRepresentative = #{legalrepresentative}</if>
+            <if test="telephone != null  and telephone != ''"> and Telephone = #{telephone}</if>
+            <if test="faxnumber != null  and faxnumber != ''"> and FaxNumber = #{faxnumber}</if>
+            <if test="email != null  and email != ''"> and Email = #{email}</if>
+            <if test="adress != null  and adress != ''"> and Adress = #{adress}</if>
+            <if test="postalcode != null  and postalcode != ''"> and PostalCode = #{postalcode}</if>
+            <if test="salesman != null  and salesman != ''"> and SalesMan = #{salesman}</if>
+            <if test="taxid != null  and taxid != ''"> and TaxId = #{taxid}</if>
+            <if test="remarks != null  and remarks != ''"> and Remarks = #{remarks}</if>
+            <if test="accountname != null  and accountname != ''"> and AccountName like concat('%', #{accountname}, '%')</if>
+            <if test="openingbank != null  and openingbank != ''"> and OpeningBank = #{openingbank}</if>
+            <if test="bankaccount != null  and bankaccount != ''"> and BankAccount = #{bankaccount}</if>
+            <if test="contactname != null  and contactname != ''"> and ContactName like concat('%', #{contactname}, '%')</if>
+            <if test="post != null  and post != ''"> and Post = #{post}</if>
+            <if test="contactinformation != null  and contactinformation != ''"> and ContactInformation = #{contactinformation}</if>
+            <if test="tenantId != null "> and tenant_id = #{tenantId}</if>
+        </where>
+    </select>
+    
+    <select id="selectSaleConnectionById" parameterType="Long" resultMap="SaleConnectionResult">
+        <include refid="selectSaleConnectionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSaleConnection" parameterType="SaleConnection" useGeneratedKeys="true" keyProperty="id">
+        insert into sale_connection
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="unitname != null and unitname != ''">UnitName,</if>
+            <if test="unitcategory != null">UnitCategory,</if>
+            <if test="legalrepresentative != null">LegalRepresentative,</if>
+            <if test="telephone != null and telephone != ''">Telephone,</if>
+            <if test="faxnumber != null">FaxNumber,</if>
+            <if test="email != null">Email,</if>
+            <if test="adress != null">Adress,</if>
+            <if test="postalcode != null">PostalCode,</if>
+            <if test="salesman != null">SalesMan,</if>
+            <if test="taxid != null">TaxId,</if>
+            <if test="remarks != null">Remarks,</if>
+            <if test="accountname != null">AccountName,</if>
+            <if test="openingbank != null">OpeningBank,</if>
+            <if test="bankaccount != null">BankAccount,</if>
+            <if test="contactname != null">ContactName,</if>
+            <if test="post != null">Post,</if>
+            <if test="contactinformation != null">ContactInformation,</if>
+            <if test="tenantId != null">tenant_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="unitname != null and unitname != ''">#{unitname},</if>
+            <if test="unitcategory != null">#{unitcategory},</if>
+            <if test="legalrepresentative != null">#{legalrepresentative},</if>
+            <if test="telephone != null and telephone != ''">#{telephone},</if>
+            <if test="faxnumber != null">#{faxnumber},</if>
+            <if test="email != null">#{email},</if>
+            <if test="adress != null">#{adress},</if>
+            <if test="postalcode != null">#{postalcode},</if>
+            <if test="salesman != null">#{salesman},</if>
+            <if test="taxid != null">#{taxid},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="accountname != null">#{accountname},</if>
+            <if test="openingbank != null">#{openingbank},</if>
+            <if test="bankaccount != null">#{bankaccount},</if>
+            <if test="contactname != null">#{contactname},</if>
+            <if test="post != null">#{post},</if>
+            <if test="contactinformation != null">#{contactinformation},</if>
+            <if test="tenantId != null">#{tenantId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSaleConnection" parameterType="SaleConnection">
+        update sale_connection
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="unitname != null and unitname != ''">UnitName = #{unitname},</if>
+            <if test="unitcategory != null">UnitCategory = #{unitcategory},</if>
+            <if test="legalrepresentative != null">LegalRepresentative = #{legalrepresentative},</if>
+            <if test="telephone != null and telephone != ''">Telephone = #{telephone},</if>
+            <if test="faxnumber != null">FaxNumber = #{faxnumber},</if>
+            <if test="email != null">Email = #{email},</if>
+            <if test="adress != null">Adress = #{adress},</if>
+            <if test="postalcode != null">PostalCode = #{postalcode},</if>
+            <if test="salesman != null">SalesMan = #{salesman},</if>
+            <if test="taxid != null">TaxId = #{taxid},</if>
+            <if test="remarks != null">Remarks = #{remarks},</if>
+            <if test="accountname != null">AccountName = #{accountname},</if>
+            <if test="openingbank != null">OpeningBank = #{openingbank},</if>
+            <if test="bankaccount != null">BankAccount = #{bankaccount},</if>
+            <if test="contactname != null">ContactName = #{contactname},</if>
+            <if test="post != null">Post = #{post},</if>
+            <if test="contactinformation != null">ContactInformation = #{contactinformation},</if>
+            <if test="tenantId != null">tenant_id = #{tenantId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSaleConnectionById" parameterType="Long">
+        delete from sale_connection where id = #{id}
+    </delete>
+
+    <delete id="deleteSaleConnectionByIds" parameterType="String">
+        delete from sale_connection where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="findSalesMans" resultType="java.lang.String">
+        select distinct SalesMan from sale_connection
+    </select>
+</mapper>
